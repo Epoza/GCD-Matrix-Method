@@ -18,13 +18,13 @@ int findMaxWidth(int matrix[][3], int rows, int cols) {
     return maxWidth;
 }
 
+// Count how many times printMatrix has run
 int stepNumber = 0;
 
 // Function to print a matrix
 void printMatrix(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) {
     int rows = 2;
     int cols = 3;
-
     stepNumber++;
     printf("\n(#%d)Your new matrix is: \n", stepNumber);
 
@@ -39,7 +39,7 @@ void printMatrix(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2
         printf("|");
         printf("\n");
     }
-    // function to calculate next matrix
+    // Calculate the next matrix
     calculate(matrix, gcd, coefficient1, coefficient2);
 }
 
@@ -52,6 +52,7 @@ void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) 
     int botNum1 = matrix[1][1];
     int botNum2 = matrix[1][2];
     
+    // GCD has been found
     if (num2 == 0) {
         printf("Calculations finished\n");
         *gcd = num1;
@@ -66,7 +67,7 @@ void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) 
         return;
     }
     
-    
+    // Perform calculations
     int quotient;
     if (num1 >= num2) {
         quotient = (num1 / num2) * -1;
@@ -96,6 +97,7 @@ void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) 
     }
 }
 
+// Function to make sure user enters a positive whole number
 int validateUserInput() {
     int number;
     do {
@@ -132,10 +134,11 @@ int main() {
     printMatrix(baseMatrix, &gcd, &coefficient1, &coefficient2);
 
     // Display the results
-    printf("\nThe GCD is: %d\n", gcd);
+    printf("\nThe GCD(%d,%d) is: %d\n",input1, input2, gcd);
     printf("Numbers to use in formula: %d %d\n", coefficient1, coefficient2);
-    // give option to user to show the formula
-    // formula is gcd = input1(coefficient1) + input2(coefficient2)
+    // Show the formula
+    printf("See for yourself: the formula is gcd = input1(coefficient1) + input2(coefficient2)\n");
+    printf("%d = %d(%d) + %d(%d)\n", gcd, input1, coefficient1, input2, coefficient2);
     printf("Program complete\n");
 
     return 0;
