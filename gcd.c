@@ -4,21 +4,37 @@
 // Function declaration
 void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2);
 
-// Function to update the matrix
-void updateMatrix() {
-    // Implementation
+// Function to find the maximum width of numbers in the matrix for GUI
+int findMaxWidth(int matrix[][3], int rows, int cols) {
+    int maxWidth = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            int numWidth = snprintf(NULL, 0, "%d", matrix[i][j]);
+            if (numWidth > maxWidth) {
+                maxWidth = numWidth;
+            }
+        }
+    }
+    return maxWidth;
 }
+
+int stepNumber = 0;
 
 // Function to print a matrix
 void printMatrix(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) {
-    printf("\nYour new matrix is: \n");
-
     int rows = 2;
     int cols = 3;
+
+    stepNumber++;
+    printf("\n(#%d)Your new matrix is: \n", stepNumber);
+
+    // Find the maximum width of numbers in the matrix for GUI
+    int maxWidth = findMaxWidth(matrix, rows, cols);
+
     for (int i = 0; i < rows; i++) {
         printf("|");
         for (int j = 0; j < cols; j++) {
-            printf("%4d", matrix[i][j]);
+            printf("%*d", maxWidth + 1, matrix[i][j]);
         }
         printf("|");
         printf("\n");
@@ -42,7 +58,14 @@ void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) 
         *coefficient1 = topNum1;
         *coefficient2 = topNum2;
         return;
+    } else if (num1 == 0){
+        printf("Calculations finished\n");
+        *gcd = num2;
+        *coefficient1 = botNum1;
+        *coefficient2 = botNum2;
+        return;
     }
+    
     
     int quotient;
     if (num1 >= num2) {
@@ -73,14 +96,24 @@ void calculate(int matrix[][3], int *gcd, int *coefficient1, int *coefficient2) 
     }
 }
 
+int validateUserInput() {
+    int number;
+    do {
+        printf("Enter a positive whole number: ");
+        scanf("%d", &number);
+        if (number <= 0) {
+            printf("Invalid input. Please enter a positive whole number.\n");
+        }
+    } while (number <= 0); // Repeat until a positive whole number is entered
+    return number;
+}
+
 int main() {
     int input1, input2;
 
     // Get user input for both numbers
-    printf("Enter the first number: ");
-    scanf("%d", &input1);
-    printf("Enter the second number: ");
-    scanf("%d", &input2);
+    input1 = validateUserInput();
+    input2 = validateUserInput();
 
     // Check and swap if necessary so that input1 stores the higher number
     if (input2 > input1) {
