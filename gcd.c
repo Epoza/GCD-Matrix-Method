@@ -135,9 +135,9 @@ int main() {
 
     // Display the results
     printf("\nThe GCD(%d,%d) is: %d\n",input1, input2, gcd);
-    printf("Numbers to use in formula: %d %d\n", coefficient1, coefficient2);
+    printf("Numbers to use in linear combination: %d %d\n", coefficient1, coefficient2);
     // Show the formula
-    printf("See for yourself: the formula is gcd = input1(coefficient1) + input2(coefficient2)\n");
+    printf("Linear combination formula: gcd = input1(coefficient1) + input2(coefficient2)\n");
     printf("%d = %d(%d) + %d(%d)\n", gcd, input1, coefficient1, input2, coefficient2);
     printf("Program complete\n");
 
